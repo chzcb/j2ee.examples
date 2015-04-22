@@ -7,7 +7,7 @@
 	<constant name="struts.i18n.encoding" value="utf-8"></constant>
     <constant name="struts.devMode" value="true" />
     
-	<package name="user" extends="struts-default">
+	<package name="user" namespace="/structs" extends="struts-default">
 		<action name="login_input" class="structs_examples.action.UserAction" method="login_input">
 			<result name="success">/login.jsp</result>
 		</action>

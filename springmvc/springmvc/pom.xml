@@ -7,6 +7,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>springmvc Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <!-- 属性配置 -->  
+  <properties>
+  	<springmvc.version>4.1.6.RELEASE</springmvc.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -14,6 +18,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${springmvc.version}</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>springmvc</finalName>
