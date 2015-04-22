@@ -7,6 +7,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>structs Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <!-- 属性配置 -->  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<structs.version>2.3.20</structs.version>  
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -14,6 +19,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- Struts2 依赖 -->  
+    <dependency>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts2-core</artifactId>
+		<version>${structs.version}</version>
+	</dependency>
+
   </dependencies>
   <build>
     <finalName>structs</finalName>
