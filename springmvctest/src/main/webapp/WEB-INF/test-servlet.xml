@@ -26,7 +26,6 @@
     
     <bean name="/hello" class="chzcb.springmvctest.controller.HelloWorldController"/> 
     
-    
 	<!-- 拦截器 -->
     <mvc:interceptors>
 		<bean class="chzcb.springmvctest.interceptor.MyInterceptor" />
