@@ -1,0 +1,22 @@
+<!DOCTYPE web-app>
+<web-app>
+  <display-name>Spring MVC Test Project</display-name>
+  <servlet>
+    <servlet-name>test</servlet-name>  
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
+    <load-on-startup>1</load-on-startup>  
+  </servlet>  
+  <servlet-mapping>  
+    <servlet-name>test</servlet-name>  
+    <url-pattern>/</url-pattern>  
+  </servlet-mapping>  
+  <!-- 用于spring框架的配置文件路径，可以使用通配符，多个路径用逗号分隔-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <!-- Spring的ApplicationContext的载入 -->
+  <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+</web-app>
