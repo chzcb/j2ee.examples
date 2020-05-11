@@ -1,5 +1,5 @@
 dhp:
-  type: Netty
+#  type: Netty
   nodes:
     - name: default
       host: 127.0.0.1

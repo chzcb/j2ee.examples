@@ -18,4 +18,5 @@ public interface IHelloService {
 
     @DMethod(command = "hello/streamSay")
     public void streamSay(HelloRequest request, Stream<HelloResponse> stream);
+
 }

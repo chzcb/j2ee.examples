@@ -32,7 +32,7 @@ class WebDemoApplicationTests {
     }
 
     @Test
-    void callHello() {
+    void callHello() throws InterruptedException {
         HelloResponse ret = service.say(new HelloRequest());
         log.info("default say: {}", ret);
         Future<HelloResponse> responseFuture = service.asyncSay(new HelloRequest());
@@ -60,5 +60,7 @@ class WebDemoApplicationTests {
                 log.info("onCompleted stream");
             }
         });
+
+        Thread.sleep(1000000);
     }
 }

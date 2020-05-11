@@ -7,10 +7,12 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = {"org.dhp.examples.rpcdemo.server"})
 @EnableConfigurationProperties(DhpProperties.class)
 @EnableDhpRpcServer
+@EnableScheduling
 public class RpcServerDemoApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

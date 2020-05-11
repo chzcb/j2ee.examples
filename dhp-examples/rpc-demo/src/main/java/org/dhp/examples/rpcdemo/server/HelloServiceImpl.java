@@ -8,8 +8,12 @@ import org.dhp.core.rpc.FutureImpl;
 import org.dhp.examples.rpcdemo.pojo.HelloRequest;
 import org.dhp.examples.rpcdemo.pojo.HelloResponse;
 import org.dhp.examples.rpcdemo.service.IHelloService;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,12 +48,20 @@ public class HelloServiceImpl implements IHelloService {
         return future;
     }
 
+    protected Set<Stream> streamSayList = ConcurrentHashMap.newKeySet();
+
     public void streamSay(HelloRequest request, Stream<HelloResponse> stream) {
-        pool.scheduleAtFixedRate(() -> {
-            HelloResponse response = HelloResponse.builder()
-                    .content("streamSay result: " + count.incrementAndGet())
-                    .build();
+        streamSayList.add(stream);
+    }
+
+    @Scheduled(fixedRate = 15000)
+    public void taskSay() {
+        log.info("publish say");
+        HelloResponse response = HelloResponse.builder()
+                .content("streamSay result: " + count.incrementAndGet())
+                .build();
+        for (Stream stream : streamSayList) {
             stream.onNext(response);
-        }, 1000, 1000, TimeUnit.MILLISECONDS);
+        }
     }
 }
