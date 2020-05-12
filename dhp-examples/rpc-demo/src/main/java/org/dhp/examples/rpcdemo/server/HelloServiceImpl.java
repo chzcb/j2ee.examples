@@ -1,9 +1,9 @@
 package org.dhp.examples.rpcdemo.server;
 
 import lombok.extern.slf4j.Slf4j;
-import org.dhp.common.rpc.ListenableFuture;
 import org.dhp.common.rpc.RpcResponse;
 import org.dhp.common.rpc.Stream;
+import org.dhp.common.rpc.StreamFuture;
 import org.dhp.core.rpc.FutureImpl;
 import org.dhp.examples.rpcdemo.pojo.HelloRequest;
 import org.dhp.examples.rpcdemo.pojo.HelloResponse;
@@ -11,7 +11,6 @@ import org.dhp.examples.rpcdemo.service.IHelloService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -35,7 +34,7 @@ public class HelloServiceImpl implements IHelloService {
         return response;
     }
 
-    public ListenableFuture<HelloResponse> asyncSay(HelloRequest request) {
+    public StreamFuture<HelloResponse> asyncSay(HelloRequest request) {
         FutureImpl future = new FutureImpl<RpcResponse>() {
         };
         pool.schedule(() -> {
@@ -56,7 +55,6 @@ public class HelloServiceImpl implements IHelloService {
 
     @Scheduled(fixedRate = 15000)
     public void taskSay() {
-        log.info("publish say");
         HelloResponse response = HelloResponse.builder()
                 .content("streamSay result: " + count.incrementAndGet())
                 .build();
