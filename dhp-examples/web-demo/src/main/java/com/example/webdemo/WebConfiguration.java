@@ -1,6 +1,7 @@
 package com.example.webdemo;
 
 import com.example.webdemo.config.HeaderArgumentResolver;
+import com.example.webdemo.intercept.ExceptionInterceptor;
 import com.example.webdemo.intercept.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(headerInterceptor);
+        registry.addInterceptor(new ExceptionInterceptor());
     }
     
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {

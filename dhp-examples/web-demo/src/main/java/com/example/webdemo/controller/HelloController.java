@@ -8,18 +8,19 @@ import org.dhp.examples.rpcdemo.service.IHelloService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-
 @Slf4j
 @RequestMapping("/hello")
 @RestController
 public class HelloController {
 
-    @Resource
+//    @Resource
     IHelloService service;
 
     @RequestMapping("/say")
     public String say() {
+        if(service == null){
+            throw new Error("ddd");
+        }
         HelloRequest request = new HelloRequest();
         HelloResponse response = service.say(request);
         return response.getContent();
