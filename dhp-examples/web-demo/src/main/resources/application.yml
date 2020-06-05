@@ -1,10 +1,42 @@
 dhp:
-#  type: Netty
+  type: Netty
   nodes:
-    - name: default
+    - name: demo
       host: 127.0.0.1
       port: 6001
       filters:
         - "org.dhp.examples.rpcdemo.client"
 server:
-  port: 8080
+  port: 8081
+  
+
+  
+spring:
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org:
+        quartx:
+          scheduler:
+            instanceName: MyQuartzScheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+          jobStore:
+            useProperties: false
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            isClustered: true
+            clusterCheckinInterval: 2000
+            tablePrefix: qrtz_
+            dataSource: qrtzDB
+          dataSource:
+            qrtzDB:
+              driver: com.mysql.jdbc.Driver
+              URL: jdbc:mysql://localhost:3306/test?serverTimezone=UTF-8&characterEncoding=utf-8
+              user: root
+              password: mysql
+              maxConnections: 5

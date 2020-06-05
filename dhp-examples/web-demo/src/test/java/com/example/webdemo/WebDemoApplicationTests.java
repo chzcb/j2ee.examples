@@ -2,6 +2,8 @@ package com.example.webdemo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.dhp.common.rpc.Stream;
+import org.dhp.examples.rpcdemo.pojo.AddRequest;
+import org.dhp.examples.rpcdemo.pojo.AddResponse;
 import org.dhp.examples.rpcdemo.pojo.HelloRequest;
 import org.dhp.examples.rpcdemo.pojo.HelloResponse;
 import org.dhp.examples.rpcdemo.service.IHelloService;
@@ -29,6 +31,17 @@ class WebDemoApplicationTests {
             service.say(new HelloRequest());
         }
         log.info("cost {} ms", (System.currentTimeMillis() - st));
+    }
+    
+    @Test
+    void addTest() throws InterruptedException {
+        for(int i=0;i<10000;i++){
+            AddRequest request = new AddRequest();
+            request.setAddition(1);
+            AddResponse response = service.add(request);
+            log.info("add: {}", response);
+            Thread.sleep(1000);
+        }
     }
 
     @Test

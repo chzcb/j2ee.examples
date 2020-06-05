@@ -10,8 +10,6 @@
         </encoder>
     </appender>
 
-    <logger name="org.dhp.core" level="DEBUG"/>
-
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
