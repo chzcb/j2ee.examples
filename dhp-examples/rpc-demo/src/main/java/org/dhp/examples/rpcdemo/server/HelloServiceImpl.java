@@ -37,7 +37,7 @@ public class HelloServiceImpl implements IHelloService {
 
     @Override
     public HelloResponse say(HelloRequest request) {
-        comp.check(request);
+        RpcResponse resp = comp.check(request);
         HelloResponse response = HelloResponse.builder()
                 .content("say result")
                 .build();
