@@ -17,6 +17,8 @@
     </properties>
     <modules>
         <module>web-base</module>
+        <module>rpc-demo-service</module>
+        <module>rpc-demo</module>
         <module>rpc-demo2</module>
     </modules>
     <packaging>pom</packaging>
