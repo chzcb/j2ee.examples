@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableConfigurationProperties(DhpProperties.class)
-@EnableDhpRpcClient(basePackages="org.dhp.examples.rpcdemo")
+@EnableDhpRpcClient(basePackages={"org.dhp.examples.rpcdemo","org.chzcb"})
 public class WebDemoApplication {
     
     @Bean
