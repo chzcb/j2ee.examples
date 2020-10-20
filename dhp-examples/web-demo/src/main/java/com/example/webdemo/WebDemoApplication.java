@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@DhpRpcClientScanner(basePackages="org.dhp.examples.rpcdemo")
+@DhpRpcClientScanner(basePackages={"org.dhp.examples.rpcdemo","org.chzcb"})
 public class WebDemoApplication {
     
     @Bean

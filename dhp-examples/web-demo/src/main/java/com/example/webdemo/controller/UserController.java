@@ -1,9 +1,7 @@
 package com.example.webdemo.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.chzcb.module.user.pojo.req.UserLoginReq;
-import org.chzcb.module.user.pojo.resp.UserLoginResp;
-import org.chzcb.module.user.service.IUserService;
+import org.chzcb.user.service.IUserService;
 import org.dhp.common.utils.JacksonUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
