@@ -1,7 +1,16 @@
 package org.dhp.examples.rpcdemo.pojo;
 
-import org.dhp.common.rpc.RpcRequest;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.dhp.common.rpc.IRpcRequest;
+import org.dhp.common.rpc.RpcHeader;
 
-public class HelloRequest extends RpcRequest {
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class HelloRequest implements IRpcRequest<RpcHeader> {
+    RpcHeader header;
 }

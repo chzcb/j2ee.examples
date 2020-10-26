@@ -1,9 +1,17 @@
 package org.dhp.examples.rpcdemo.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.dhp.common.rpc.RpcRequest;
+import lombok.NoArgsConstructor;
+import org.dhp.common.rpc.IRpcRequest;
+import org.dhp.common.rpc.RpcHeader;
 
 @Data
-public class AddRequest extends RpcRequest {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AddRequest implements IRpcRequest {
+    RpcHeader header;
     Integer addition;
 }
