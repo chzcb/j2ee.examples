@@ -33,7 +33,7 @@ public class HelloController {
         return response.getContent();
     }
     
-    @RequestMapping("/say3")
+    @RequestMapping("/say1")
     public String say3(
             @RequestParam(value = "words", required = true)
             String words,
@@ -49,6 +49,20 @@ public class HelloController {
         HelloRequest request = new HelloRequest();
         HelloResponse response = service.say(request);
         return response.getContent();
+    }
+
+    @RequestMapping("/say3")
+    public String say3(Header header) {
+        log.info("request from {}", header.getIp());
+        HelloRequest request = new HelloRequest();
+        try {
+            HelloResponse response = service.asyncSay(request).get();
+            return response.getContent();
+        } catch (Exception e){
+            log.error(e.getMessage(), e);
+            return e.getMessage();
+        }
+
     }
     
     @Resource

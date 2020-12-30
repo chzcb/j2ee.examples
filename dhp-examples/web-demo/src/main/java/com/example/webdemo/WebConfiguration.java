@@ -23,7 +23,7 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(headerInterceptor);
         registry.addInterceptor(new ExceptionInterceptor());
     }
-    
+
     protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new HeaderArgumentResolver());
     }

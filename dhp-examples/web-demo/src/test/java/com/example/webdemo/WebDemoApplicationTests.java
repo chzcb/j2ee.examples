@@ -11,7 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 @Slf4j
@@ -21,21 +25,74 @@ class WebDemoApplicationTests {
     @Resource
     IHelloService service;
 
-    int TOTAL = 50000;
+    int TOTAL = 10000;
+
+    @Test
+    void call() {
+        log.info("{}", service.say(new HelloRequest()));
+    }
 
     @Test
     void contextLoads() {
-        service.say(new HelloRequest());
+        service.say2(new HelloRequest());
         long st = System.currentTimeMillis();
         for (int i = 0; i < TOTAL; i++) {
-            service.say(new HelloRequest());
+            try {
+                service.say2(new HelloRequest());
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
         }
         log.info("cost {} ms", (System.currentTimeMillis() - st));
     }
-    
+
+    @Test
+    void contextLoads2() throws ExecutionException, InterruptedException{
+        service.say2(new HelloRequest());
+        long st = System.currentTimeMillis();
+        ExecutorService pool = Executors.newFixedThreadPool(100);
+        List<Future> flist = new LinkedList<>();
+        for (int i = 0; i < TOTAL; i++) {
+            try {
+                Future f = pool.submit(() -> {
+                    service.say2(new HelloRequest());
+                });
+                flist.add(f);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        for(Future f : flist) {
+            f.get();
+        }
+        log.info("cost {} ms", (System.currentTimeMillis() - st));
+    }
+
+    @Test
+    void multiCall() throws ExecutionException, InterruptedException {
+        service.say(new HelloRequest());
+        long st = System.currentTimeMillis();
+        ExecutorService pool = Executors.newFixedThreadPool(100);
+        List<Future> flist = new LinkedList<>();
+        for (int i = 0; i < TOTAL; i++) {
+            try {
+                Future f = pool.submit(() -> {
+                    service.say(new HelloRequest());
+                });
+                flist.add(f);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        for(Future f : flist) {
+            f.get();
+        }
+        log.info("cost {} ms", (System.currentTimeMillis() - st));
+    }
+
     @Test
     void addTest() throws InterruptedException {
-        for(int i=0;i<10000;i++){
+        for (int i = 0; i < 10000; i++) {
             AddRequest request = new AddRequest();
             request.setAddition(1);
             AddResponse response = service.add(request);

@@ -1,7 +1,7 @@
 dhp:
-  type: Netty
+  type: NIO
   nodes:
-    - name: 'basic_user'
+    - name: 'demo'
       host: 127.0.0.1
       port: 6001
 server:
@@ -10,6 +10,13 @@ server:
 
   
 spring:
+  redis:
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 5
+        max-wait: 4s
+    timeout: 10s
   quartz:
     job-store-type: jdbc
     properties:

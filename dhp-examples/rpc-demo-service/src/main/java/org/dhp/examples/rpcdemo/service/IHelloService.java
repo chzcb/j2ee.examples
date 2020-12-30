@@ -15,6 +15,9 @@ public interface IHelloService {
     @DMethod(command = "hello/say")
     public HelloResponse say(HelloRequest request);
 
+    @DMethod(command = "hello/say2")
+    public HelloResponse say2(HelloRequest request);
+
     @DMethod(command = "hello/asyncSay")
     public StreamFuture<HelloResponse> asyncSay(HelloRequest request);
 

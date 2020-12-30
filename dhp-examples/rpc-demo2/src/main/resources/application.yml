@@ -1,2 +1,3 @@
 dhp:
   port: 6002
+  type: NIO

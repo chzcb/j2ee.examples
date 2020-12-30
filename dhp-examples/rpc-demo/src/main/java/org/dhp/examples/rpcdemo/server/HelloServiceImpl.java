@@ -1,11 +1,11 @@
 package org.dhp.examples.rpcdemo.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.dhp.common.rpc.RpcRequest;
 import org.dhp.common.rpc.RpcResponse;
 import org.dhp.common.rpc.Stream;
 import org.dhp.common.rpc.StreamFuture;
 import org.dhp.core.rpc.FutureImpl;
-import org.dhp.examples.rpcdemo.MyException;
 import org.dhp.examples.rpcdemo.comp.IChildComp;
 import org.dhp.examples.rpcdemo.pojo.AddRequest;
 import org.dhp.examples.rpcdemo.pojo.AddResponse;
@@ -33,15 +33,25 @@ public class HelloServiceImpl implements IHelloService {
     AtomicInteger count = new AtomicInteger();
     
     @Resource
-    IChildComp comp;
+    IChildComp childComp;
 
     @Override
     public HelloResponse say(HelloRequest request) {
-        RpcResponse resp = comp.check(request);
+        RpcResponse resp = childComp.check(RpcRequest.builder().header(request.getHeader()).build());
         HelloResponse response = HelloResponse.builder()
                 .content("say result")
                 .build();
-        throw new MyException("ddd");
+        return response;
+//        throw new MyException("ddd");
+    }
+
+    @Override
+    public HelloResponse say2(HelloRequest request) {
+        HelloResponse response = HelloResponse.builder()
+                .content("say result")
+                .build();
+        return response;
+//        throw new MyException("ddd");
     }
     
     @Resource

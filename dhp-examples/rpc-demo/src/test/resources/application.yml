@@ -1,6 +1,5 @@
 dhp:
-  type: NIO
-  port: 6001
+  type: Netty
   nodes:
   - name: demo2
     host: 127.0.0.1
